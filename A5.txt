@@ -1,0 +1,76 @@
+A5
+
+
+
+Our final assignment will be the final evolution of the program we left off with in Lab 10. Copy all your source files into A5.
+
+We will be using file data to load data into our Arraylist to use it as a data structure database.
+You will want to download the VDB.zip file and place it in the same directory as your project.
+
+Class file mods needed - 
+We will only be slightly modifying the base Vehicle class. 
+-Add a datafield of the String type for vclass. This will store the classification of the vehicle's type.(A,T,or MC)
+-Add Setter and Getter method for this field. Setter method will use .toUpperCase on incoming values
+
+.stats() method will need to be modified in the Vehicle, Truck, and Car classes to include vclass.
+
+__________________________________________
+Fleet.java
+Make sure to import needed libraries
+import java.util.*;
+import java.util.Scanner;
+import java.io.*; // needed for file access
+Your main method will need to be allowed to throw exceptions for the file access to work correctly, it its definition line will be:
+public static void main(String[] args) throws Exception
+
+You will be able to use MUCH of the code from Lab 10, so make sure its complete and functional before using its source code for A5.
+Keep your Vehicle ArrayList
+You will also need your Scanner thats connected to your keyboard.(lets call it 'input')
+Prompt the user for the name of your DB text file(lets call it db), store the name they enter and use it to create your second scanner.(lets call it DBread)
+Scanner DBread = new Scanner(new File(db));
+While Loop - refit it to be a file read loop instead of using the 'count' variable from Lab 10
+The way this process will work is the first value of each line will be the vehicle class(a value of "A", "T", or "MC"), pull that value from the DBread scanner. 
+Replace the existing tests in your if, else if test blocks from testing 'type' to testing .equals("value") type test.
+Example. If the string holding the class was called 'VC'
+String VC = DBread.next();
+So our first test would look like
+if (VC.equals("A"))
+This would be the test to identify it as a Car that being entered. 
+In each of the existing if, else if test we can keep our Scanner reading BUT WE MUST CHANGE THE SCANNER TO THE FILE READING SCANNER - NOT the one reading from the keyboard. Get rid of the prompts to the user for each value. We want this program to run quickly and the file allows us to do that.
+Make sure to add the call to the Setter for vclass to each test group appropriate to its type, in the case of Car it would be:
+mycar.setVclass("A");
+Once done modifying the If test block, remove the decrement for 'count' as count itself is no longer needed.
+
+END OF WHILE LOOP
+After the loop, prompt the user for which class of vehicle would they like to list our inventory of.
+"What vehicle class would you like to list?(A: Automobile, T: Truck, MC: Motorcycle)"
+Read that into a String from the keyboard bound Scanner(lets call that variable 'search')
+
+Our final modification will be to the enhance for loop we have to output the vehicles .stats() method output. However, we dont want to show ALL of them anymore. Only the vehicles of the class we are looking for based on our 'search' variable.
+Create a 'count' variable and we will increment it for each vehicle found in our search.
+Inside the enhanced for loop:
+Create a string and get the current vehcile's v class(use its getter method)
+Test it using .equals against 'search', thats where the car.stats() should be. This way only vehicles whose .getVclass() values matches our 'search' variable will be output. 
+Increment the 'count' variable under control of the if test.
+After the enhanced for loop is done:
+System.out.println( count + " vehicles of the " + search + " class have been found and returned by your search");
+
+Effectively we have created a searchable database using our arraylist. You can see how we could use this type of loop to search for literally any aspect of a vehicle by combining logical tests.
+
+___________________________________________
+Input file data format:
+Class A - Car
+A Tesla ModelS 2700 Cobalt 2020 75 4 // Class make model weight color year mpg seating
+
+Class T - Truck
+T Ford F150 3200 Red 2019 22 3 1300 // Class make model weight color year mpg seating hauling
+
+Class MC - Motorcycle
+MC Honda CBR1000RR 450 Red-Black 2021 65  // Class make model weight color year mpg
+
+____________________________________________
+What to hand in?
+
+Submit all java files(Fleet,Vehicle,Truck,Car,Motorcycle)
+Run your program and perform a search for each vehicle class. Submit a screenshot of each. Make sure all datafields are visible and the output from:
+System.out.println( count + " vehicles of the " + search + " class have been found and returned by your search");
